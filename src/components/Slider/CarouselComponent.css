@@ -1,0 +1,12 @@
+.slider-arrow {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+.arrow-btn {
+	top: 45%;
+	z-index: 1;
+}
+.next {
+	float: right;
+}
