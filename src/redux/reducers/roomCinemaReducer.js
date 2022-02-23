@@ -4,6 +4,7 @@ const initialState = {
 	danhSachGhe: [],
 	thongTinPhim: {},
 	danhSachGheChon: [],
+	danhSachGheKhachChon: [],
 };
 
 const roomCinemaReducer = (state = initialState, { type, payload }) => {

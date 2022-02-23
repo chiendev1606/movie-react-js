@@ -1,7 +1,7 @@
 import { history } from '../../../App';
 import { quanLyNguoiDungServices } from '../../../services/QuanLyNguoiDungServices';
 import { STATUS_API } from '../../../util/settings/config';
-import { dispatchActionLoginReducer } from '../sync/actions';
+import { dispatchActionGetUserDetails, dispatchActionLoginReducer } from '../sync/actions';
 
 export const login =
 	({ payload }) =>
@@ -16,3 +16,14 @@ export const login =
 			console.log(error);
 		}
 	};
+
+export const getUserDetails = () => async dispatch => {
+	try {
+		const { data, status } = await quanLyNguoiDungServices.layThongTinTaiKhoan();
+		if (status === STATUS_API.SUCCESS) {
+			dispatch(dispatchActionGetUserDetails(data.content));
+		}
+	} catch (error) {
+		console.log(error);
+	}
+};

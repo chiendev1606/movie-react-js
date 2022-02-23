@@ -10,6 +10,7 @@ import {
 	CHOOSE_MOVIE_CHAIR,
 	TURN_ON_LOADING,
 	TURN_OFF_LOADING,
+	GET_USER_DETAILS,
 } from '../types/types';
 
 export const dispatchGetCarouselReducer = data => ({ type: GET_CAROUSEL, payload: data });
@@ -45,3 +46,4 @@ export const dispatchActionChooseMovieChair = data => ({
 
 export const dispatchActionTurnOnLoading = () => ({ type: TURN_ON_LOADING });
 export const dispatchActionTurnOffLoading = () => ({ type: TURN_OFF_LOADING });
+export const dispatchActionGetUserDetails = data => ({ type: GET_USER_DETAILS, payload: data });
