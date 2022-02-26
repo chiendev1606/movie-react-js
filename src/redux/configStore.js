@@ -6,8 +6,9 @@ import cinemaReducer from './reducers/cinemaReducer';
 import filmDetailReducer from './reducers/filmDetailReducer';
 import userLoginReducer from './reducers/userLoginReducer';
 import roomCinemaReducer from './reducers/roomCinemaReducer';
-import LoadingReducer from './reducers/LoadingReducer';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import LoadingReducer from './reducers/LoadingReducer';
+import filmsManagementReducer from './reducers/filmsManagementReducer';
 
 const middleware = [thunk];
 
@@ -19,6 +20,7 @@ const rooReducer = combineReducers({
 	userLoginReducer,
 	roomCinemaReducer,
 	LoadingReducer,
+	filmsManagementReducer,
 });
 
 const store = createStore(rooReducer, composeWithDevTools(applyMiddleware(...middleware)));

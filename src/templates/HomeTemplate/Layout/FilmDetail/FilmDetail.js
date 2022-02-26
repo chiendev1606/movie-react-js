@@ -1,18 +1,20 @@
+import { Progress, Rate, Tabs } from 'antd';
+import moment from 'moment';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { layThongTinLichChieuPhim } from '../../../../redux/actions/thunk/QuanLyRapAction';
-import { filmDetailSelector } from '../../../../redux/selectors/selectors';
-import { Progress, Rate, Tabs } from 'antd';
 import { NavLink } from 'react-router-dom';
-import moment from 'moment';
+import { layThongTinLichChieuPhim } from '../../../../redux/actions/thunk/QuanLyRapAction';
+import { filmDetailByMovieScheduleSelector } from '../../../../redux/selectors/selectors';
 
 function FilmDetail(props) {
 	const dispatch = useDispatch();
-	const filmDetail = useSelector(filmDetailSelector);
+	const filmDetail = useSelector(filmDetailByMovieScheduleSelector);
 
 	useEffect(() => {
 		dispatch(layThongTinLichChieuPhim({ payload: props.match.params.id }));
 	}, [dispatch, props.match.params.id]);
+
+	console.log(filmDetail);
 
 	return (
 		<>

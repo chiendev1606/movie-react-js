@@ -20,6 +20,8 @@ class QuanLyPhimServices extends baseService {
 		);
 	ThemPhimUploadHinh = data => this.post('/api/QuanLyPhim/ThemPhimUploadHinh', data);
 	CapNhatPhimUpLoad = data => this.post('/api/QuanLyPhim/CapNhatPhimUpload', data);
+	layThongTinPhim = data => this.get(`/api/QuanLyPhim/LayThongTinPhim?MaPhim=${data}`);
+	xoaPhim = data => this.delete(`/api/QuanLyPhim/XP?MaPhim=${data}`);
 }
 
 export const quanLyPhimService = new QuanLyPhimServices();

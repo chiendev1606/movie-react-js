@@ -1,1 +1,2 @@
 export const GET_LIST_FILMS = 'GET_LIST_FILMS';
+export const GET_SEARCH_TEXT = 'GET_SEARCH_TEXT';

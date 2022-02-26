@@ -1,4 +1,4 @@
-import { CHOOSE_MOVIE_CHAIR, GET_LIST_ROOM_TICKET } from '../actions/types/types';
+import { CHOOSE_MOVIE_CHAIR, GET_LIST_BOOKING_REAL_TIME, GET_LIST_ROOM_TICKET } from '../actions/types/types';
 
 const initialState = {
 	danhSachGhe: [],
@@ -18,6 +18,8 @@ const roomCinemaReducer = (state = initialState, { type, payload }) => {
 				...state,
 				danhSachGheChon: [...state.danhSachGheChon.filter(ghe => ghe.maGhe !== payload.maGhe)],
 			};
+		case GET_LIST_BOOKING_REAL_TIME:
+			return { ...state, danhSachGheKhachChon: payload };
 
 		default:
 			return state;

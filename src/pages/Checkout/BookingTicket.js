@@ -1,9 +1,8 @@
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { CheckOutlined, CloseOutlined, SmileOutlined } from '@ant-design/icons';
 import _ from 'lodash';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { connection } from '../..';
-import { dispatchActionChooseMovieChair } from '../../redux/actions/sync/actions';
 import {
 	datVe,
 	layDanhSachPhongVe,
@@ -15,6 +14,7 @@ import {
 	danhSachGheSelector,
 	thongTinPhimSelector,
 } from '../../redux/selectors/selectors';
+import { dispatchActionLayGheKhachChon } from '../../redux/actions/sync/actions';
 
 const BookingTicket = ({ user, id, setTabKey }) => {
 	const dispatch = useDispatch();
@@ -26,13 +26,23 @@ const BookingTicket = ({ user, id, setTabKey }) => {
 	useEffect(() => {
 		dispatch(layDanhSachPhongVe({ payload: id }));
 
-		connection.on('loadDanhSachGheDaDat', dsGheDangDatReturn => {
-			console.log(dsGheDangDatReturn);
+		connection.on('loadDanhSachGheDaDat', dsGhe => {
+			console.log(dsGhe);
+			const dsGheKhachChon = dsGhe
+				.filter(item => item.taiKhoan !== user.taiKhoan)
+				.map(item => JSON.parse(item.danhSachGhe));
+
+			dispatch(dispatchActionLayGheKhachChon(dsGheKhachChon));
 		});
-	}, [dispatch, id]);
+	}, [dispatch, id, user.taiKhoan]);
 
 	const checkChairChoose = maGheHienTai =>
 		danhSachGheChon.findIndex(ghe => ghe.maGhe === maGheHienTai) !== -1;
+
+	const checkChairOtherChoose = id => {
+		if (_.isEmpty(danhSachGheKhachChon)) return false;
+		if (danhSachGheKhachChon.findIndex(item => item.maGhe === id) !== -1) return true;
+	};
 
 	const calcTotal = () =>
 		danhSachGhe.reduce((value, ghe) => {
@@ -53,7 +63,7 @@ const BookingTicket = ({ user, id, setTabKey }) => {
 									{danhSachGhe.map((ghe, idx) => (
 										<Fragment key={ghe.maGhe}>
 											<button
-												disabled={ghe.daDat}
+												disabled={ghe.daDat || checkChairOtherChoose(ghe.maGhe)}
 												className={` m-1 p-1 text-xs inline-block w-11 h-10 rounded-xl text-white 
                          ${
 														ghe.daDat
@@ -67,7 +77,9 @@ const BookingTicket = ({ user, id, setTabKey }) => {
 														ghe.taiKhoanNguoiDat === user.taiKhoan
 															? 'green'
 															: checkChairChoose(ghe.maGhe)
-															? 'bg-orange-900'
+															? 'orange'
+															: checkChairOtherChoose(ghe.maGhe)
+															? 'purple'
 															: ''
 													}`,
 												}}
@@ -84,6 +96,8 @@ const BookingTicket = ({ user, id, setTabKey }) => {
 													) : (
 														<CloseOutlined />
 													)
+												) : checkChairOtherChoose(ghe.maGhe) ? (
+													<SmileOutlined />
 												) : (
 													ghe.tenGhe
 												)}

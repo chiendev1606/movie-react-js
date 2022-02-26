@@ -1,5 +1,5 @@
 import { GET_CAROUSEL } from '../types/carouselType';
-import { GET_LIST_FILMS } from '../types/listFilmsType';
+import { GET_LIST_FILMS, GET_SEARCH_TEXT } from '../types/listFilmsType';
 import {
 	GET_LIST_CINEMA,
 	GET_LIST_CINEMA_SUB,
@@ -11,6 +11,9 @@ import {
 	TURN_ON_LOADING,
 	TURN_OFF_LOADING,
 	GET_USER_DETAILS,
+	GET_LIST_BOOKING_REAL_TIME,
+	GET_INFO_FILMS_DETAILS,
+	GET_LIST_RAP,
 } from '../types/types';
 
 export const dispatchGetCarouselReducer = data => ({ type: GET_CAROUSEL, payload: data });
@@ -47,3 +50,7 @@ export const dispatchActionChooseMovieChair = data => ({
 export const dispatchActionTurnOnLoading = () => ({ type: TURN_ON_LOADING });
 export const dispatchActionTurnOffLoading = () => ({ type: TURN_OFF_LOADING });
 export const dispatchActionGetUserDetails = data => ({ type: GET_USER_DETAILS, payload: data });
+export const dispatchActionLayGheKhachChon = data => ({ type: GET_LIST_BOOKING_REAL_TIME, payload: data });
+export const dispatchActionGetSearchText = data => ({ type: GET_SEARCH_TEXT, payload: data });
+export const dispatchActionGetDetailFilm = data => ({ type: GET_INFO_FILMS_DETAILS, payload: data });
+export const dispatchActionGetListRap = data => ({ type: GET_LIST_RAP, payload: data });

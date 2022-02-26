@@ -7,6 +7,8 @@ class QuanLyRapServices extends baseService {
 	LayThongTinLichChieuHeThongRap = (maHeThong, maNhom = MA_NHOM) =>
 		this.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap?maHeThongRap=${maHeThong}&maNhom=${maNhom}`);
 	LayThongTinLichChieuPhim = id => this.get(`/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${id}`);
+	LayThongTinCumRapTheoHeThong = data =>
+		this.get(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${data}`);
 }
 
 export const quanLyRapService = new QuanLyRapServices();

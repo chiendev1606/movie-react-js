@@ -1,9 +1,15 @@
-import { GET_LIST_CINEMA, GET_LIST_CINEMA_SUB, GET_LIST_MOVIE_SCHEDULE_CINEMA } from '../actions/types/types';
+import {
+	GET_LIST_CINEMA,
+	GET_LIST_CINEMA_SUB,
+	GET_LIST_MOVIE_SCHEDULE_CINEMA,
+	GET_LIST_RAP,
+} from '../actions/types/types';
 
 const initialState = {
 	listCinema: [],
 	listCinemaSub: [],
 	listMovieSchedule: [],
+	listRapByCinema: [],
 };
 
 const cinemaReducer = (state = initialState, { type, payload }) => {
@@ -14,7 +20,8 @@ const cinemaReducer = (state = initialState, { type, payload }) => {
 			return { ...state, listCinemaSub: payload };
 		case GET_LIST_MOVIE_SCHEDULE_CINEMA:
 			return { ...state, ...payload };
-
+		case GET_LIST_RAP:
+			return { ...state, listRapByCinema: payload };
 		default:
 			return state;
 	}

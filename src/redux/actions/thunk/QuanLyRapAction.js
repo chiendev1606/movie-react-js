@@ -1,6 +1,6 @@
 import { quanLyRapService } from '../../../services/QuanLyRapService';
 import { STATUS_API } from '../../../util/settings/config';
-import { dispatchActionLayThongTinLichChieuPhim } from '../sync/actions';
+import { dispatchActionLayThongTinLichChieuPhim, dispatchActionGetListRap } from '../sync/actions';
 
 export const layThongTinLichChieuPhim = action => async dispatch => {
 	try {
@@ -12,3 +12,15 @@ export const layThongTinLichChieuPhim = action => async dispatch => {
 		console.log(err);
 	}
 };
+export const getListRapByCinema =
+	({ payload }) =>
+	async dispatch => {
+		try {
+			const { data, status } = await quanLyRapService.LayThongTinCumRapTheoHeThong(payload);
+			if (status === STATUS_API.SUCCESS) {
+				dispatch(dispatchActionGetListRap(data.content));
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
