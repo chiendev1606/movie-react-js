@@ -14,8 +14,6 @@ function FilmDetail(props) {
 		dispatch(layThongTinLichChieuPhim({ payload: props.match.params.id }));
 	}, [dispatch, props.match.params.id]);
 
-	console.log(filmDetail);
-
 	return (
 		<>
 			<div
@@ -31,9 +29,10 @@ function FilmDetail(props) {
 					height: '100vh',
 					width: '100%',
 					padding: 0,
-					backgroundImage: `url(${filmDetail.hinhAnh})`,
+					backgroundImage: `url(${filmDetail.hinhAnh}), url('https://picsum.photos/id/103/500/')`,
 					backgroundSize: 'cover',
 					backgroundRepeat: 'no-repeat',
+					backgroundPosition: 'center',
 					filter: 'blur(10px)',
 					zIndex: '-1',
 				}}
@@ -45,6 +44,10 @@ function FilmDetail(props) {
 							src={filmDetail.hinhAnh}
 							style={{ width: '200px', height: 'auto' }}
 							alt={filmDetail.tenPhim}
+							onError={e => {
+								e.currentTarget.onerror = null;
+								e.currentTarget.src = 'https://picsum.photos/200/300';
+							}}
 						/>
 						<div className="ml-4 text-white">
 							<h1 className="text-2xl text-white">{filmDetail.tenPhim}</h1>

@@ -3,12 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { Provider } from 'react-redux';
-import store from './redux/configStore';
+import store, { history } from './redux/configStore';
 import 'antd/dist/antd.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import * as signalR from '@aspnet/signalr';
 import { DOMAIN } from './util/settings/config';
+import { ConnectedRouter } from 'connected-react-router';
 
 export const connection = new signalR.HubConnectionBuilder()
 	.withUrl(`${DOMAIN}/DatVeHub`)
@@ -20,10 +21,11 @@ connection
 	.then(function () {
 		ReactDOM.render(
 			<Provider store={store}>
-				<App />
+				<ConnectedRouter history={history}>
+					<App />
+				</ConnectedRouter>
 			</Provider>,
 			document.getElementById('root')
 		);
 	})
 	.catch(err => console.log(err));
-

@@ -1,12 +1,16 @@
 import { PlayCircleOutlined } from '@ant-design/icons';
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { dispatchActionChangeModal, dispatchActionGetModalInfo } from '../../redux/actions/sync/actions';
 import './Film.css';
 
 function Film({ data }) {
+	const dispatch = useDispatch();
+
 	return (
 		<div className="p-1">
-			<div className="flip-card">
+			<div className="flip-card mt-2">
 				<div className="flip-card-inner">
 					<div className="flip-card-front overflow-hidden">
 						<div
@@ -21,7 +25,12 @@ function Film({ data }) {
 					<div className="flip-card-back rounded-t-xl overflow-hidden">
 						<div className="relative z-20 h-full w-full">
 							<div className="absolute w-full h-full bg-black bg-opacity-60">
-								<div className="flex flex-col justify-center items-center h-full px-4">
+								<div
+									className="flex flex-col justify-center items-center h-full px-4"
+									onClick={() => {
+										dispatch(dispatchActionGetModalInfo(data));
+										dispatch(dispatchActionChangeModal(true));
+									}}>
 									<span className="text-3xl">
 										<PlayCircleOutlined />
 									</span>

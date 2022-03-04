@@ -10,13 +10,13 @@ const HomeTemplate = ({ Component, ...restProps }) => {
 				//props.location,props.history,props.match
 
 				return (
-					<>
+					<div className="w-full h-screen">
 						<Header {...propsRoute} />
 
 						<Component {...propsRoute} />
 
 						{/* <Footer /> */}
-					</>
+					</div>
 				);
 			}}
 		/>

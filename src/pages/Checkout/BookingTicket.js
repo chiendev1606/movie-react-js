@@ -27,7 +27,6 @@ const BookingTicket = ({ user, id, setTabKey }) => {
 		dispatch(layDanhSachPhongVe({ payload: id }));
 
 		connection.on('loadDanhSachGheDaDat', dsGhe => {
-			console.log(dsGhe);
 			const dsGheKhachChon = dsGhe
 				.filter(item => item.taiKhoan !== user.taiKhoan)
 				.map(item => JSON.parse(item.danhSachGhe));

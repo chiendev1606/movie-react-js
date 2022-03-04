@@ -1,4 +1,5 @@
 import { Tabs } from 'antd';
+import { push } from 'connected-react-router';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,7 +70,12 @@ function CinemaList() {
 													<h5>{cinemaSub.diaChi}</h5>
 													<div className="w-full flex flex-wrap">
 														{phim.lstLichChieuTheoPhim?.slice(0, 9).map((item, idx) => (
-															<button key={idx} className="p-1 text-white rounded-xl bg-blue-700 m-1">
+															<button
+																onClick={() => {
+																	dispatch(push(`/detail/${phim.maPhim}`));
+																}}
+																key={idx}
+																className="p-1 text-white rounded-xl bg-blue-700 m-1">
 																{moment(item.ngayChieuGioChieu).format('HH:mm')}
 															</button>
 														))}

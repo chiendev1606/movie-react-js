@@ -1,28 +1,38 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import bannerReducer from './reducers/bannerReducer';
-import listFilmsReducer from './reducers/ListFilmsReducer';
 import cinemaReducer from './reducers/cinemaReducer';
 import filmDetailReducer from './reducers/filmDetailReducer';
-import userLoginReducer from './reducers/userLoginReducer';
-import roomCinemaReducer from './reducers/roomCinemaReducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import LoadingReducer from './reducers/LoadingReducer';
 import filmsManagementReducer from './reducers/filmsManagementReducer';
+import listFilmsReducer from './reducers/ListFilmsReducer';
+import LoadingReducer from './reducers/LoadingReducer';
+import roomCinemaReducer from './reducers/roomCinemaReducer';
+import userLoginReducer from './reducers/userLoginReducer';
+import userManagementReducer from './reducers/userManagementReducer';
+import modalReducer from './reducers/modalReducer';
 
-const middleware = [thunk];
+export const history = createBrowserHistory();
 
-const rooReducer = combineReducers({
-	bannerReducer,
-	listFilmsReducer,
-	cinemaReducer,
-	filmDetailReducer,
-	userLoginReducer,
-	roomCinemaReducer,
-	LoadingReducer,
-	filmsManagementReducer,
-});
+const middleware = [thunk, routerMiddleware(history)];
 
-const store = createStore(rooReducer, composeWithDevTools(applyMiddleware(...middleware)));
+const rooReducer = history =>
+	combineReducers({
+		router: connectRouter(history),
+		bannerReducer,
+		listFilmsReducer,
+		cinemaReducer,
+		filmDetailReducer,
+		userLoginReducer,
+		roomCinemaReducer,
+		LoadingReducer,
+		filmsManagementReducer,
+		userManagementReducer,
+		modalReducer,
+	});
+
+const store = createStore(rooReducer(history), composeWithDevTools(applyMiddleware(...middleware)));
 
 export default store;

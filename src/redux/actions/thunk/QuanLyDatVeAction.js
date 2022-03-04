@@ -1,3 +1,4 @@
+import { push } from 'connected-react-router';
 import { history } from '../../../App';
 import { connection } from '../../../index';
 import { quanLyDatVeServices } from '../../../services/QuanLyDatVeServices';
@@ -59,7 +60,7 @@ export const taoLichChieu =
 			const { data, status } = await quanLyDatVeServices.taoLichChieu(payload);
 			if (status === STATUS_API.SUCCESS) {
 				alert(data.content);
-				history.push('/admin/films');
+				dispatch(push('/admin/films'));
 			}
 		} catch (error) {
 			console.log(error);

@@ -1,4 +1,4 @@
-import { Button, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router';

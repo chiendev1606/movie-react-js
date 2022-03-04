@@ -3,15 +3,40 @@ import Film from '../Film/Film';
 import CarouselComponent from '../Slider/CarouselComponent';
 
 function SlickListFilms({ data, styleArrowPrev, styleArrowNext }) {
-	const settings = {
+	let settings_1 = {
 		dots: false,
 		infinite: true,
 		speed: 500,
-		slidesToShow: 7,
+		slidesToShow: 6,
 		slidesToScroll: 4,
 		arrows: false,
 		slidesPerRow: 1,
-		rows: 1,
+		rows: 2,
+		responsive: [
+			{
+				breakpoint: 1280,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+					slidesPerRow: 2,
+					rows: 2,
+					infinite: true,
+					dots: false,
+					arrows: false,
+				},
+			},
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 3,
+					slidesPerRow: 1,
+					rows: 2,
+					infinite: true,
+					dots: false,
+				},
+			},
+		],
 	};
 
 	const renderListFilms = () =>
@@ -27,7 +52,7 @@ function SlickListFilms({ data, styleArrowPrev, styleArrowNext }) {
 				styleArrowNext={styleArrowNext}
 				styleArrowPrev={styleArrowPrev}
 				data={renderListFilms()}
-				settings={settings}
+				settings={settings_1}
 			/>
 		</>
 	);
